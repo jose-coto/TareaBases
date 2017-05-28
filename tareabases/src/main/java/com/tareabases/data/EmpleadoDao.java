@@ -90,7 +90,6 @@ public class EmpleadoDao {
 				+ " where e.nombre != 'No suministrado' and e.cedula='"+cedula+"'";
 		
 		List<Empleado> empleado= jdbcTemplate.query(sqlSelect, new EmpleadoExtractor());
-		System.out.println(empleado.size());
 		if(empleado.isEmpty()){
 			return null;
 		}else{
@@ -168,11 +167,10 @@ public class EmpleadoDao {
 					map.put(id, empleado);
 				} // if
 				
-				// TODO Auto-generated method stub
 
 			} // while
 			return new ArrayList<Empleado>(map.values());
 
-		} // PeliculasWithActoresExtractor
+		} 
 	}
 }

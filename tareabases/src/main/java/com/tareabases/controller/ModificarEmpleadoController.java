@@ -33,22 +33,21 @@ public class ModificarEmpleadoController {
 	private Empleado empleadoModificar;
 
 	@RequestMapping(value = "/modificarEmpleado/{id}/**", method = RequestMethod.GET)
-	public String showForm(EmpleadoForm empleadoForm, Model model, @PathVariable String id,
-			HttpServletRequest request) {
+	public String showForm(EmpleadoForm empleadoForm, Model model, HttpServletRequest request) {
 
 		String cedulaBorrar = new AntPathMatcher().extractPathWithinPattern("/{id}/**", request.getRequestURI());
-		System.out.println(cedulaBorrar);
+		
 		empleadoModificar = empleadoService.findEmpleadoByCedula(cedulaBorrar);
-		
-		empleadoForm.setCedula(cedulaBorrar);
-		empleadoForm.setNombre(empleadoModificar.getNombre());
-		empleadoForm.setSeguroSocial(empleadoModificar.getSeguroSocial());
-		empleadoForm.setApellidos(empleadoModificar.getApellidos());
-		empleadoForm.setTelefono(empleadoModificar.getTelefono());
-		empleadoForm.setTipo(empleadoModificar.getTipo());
-		empleadoForm.setPrecioHora(empleadoModificar.getPrecioHora());
-		empleadoForm.setLicenciaLaboral(empleadoModificar.getLicenciaLaboral());
-		
+		if (empleadoModificar != null){
+			empleadoForm.setCedula(cedulaBorrar);
+			empleadoForm.setNombre(empleadoModificar.getNombre());
+			empleadoForm.setSeguroSocial(empleadoModificar.getSeguroSocial());
+			empleadoForm.setApellidos(empleadoModificar.getApellidos());
+			empleadoForm.setTelefono(empleadoModificar.getTelefono());
+			empleadoForm.setTipo(empleadoModificar.getTipo());
+			empleadoForm.setPrecioHora(empleadoModificar.getPrecioHora());
+			empleadoForm.setLicenciaLaboral(empleadoModificar.getLicenciaLaboral());
+		}
 		model.addAttribute("empleadoForm", empleadoForm);
 		return "modificarEmpleado";
 	}
