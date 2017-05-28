@@ -63,7 +63,7 @@ public class ProductoForm {
 	public void setCodProveedor(int codProveedor) {
 		this.codProveedor = codProveedor;
 	}
-
+	
 	public int getCantidadProductos() {
 		return cantidadProductos;
 	}
@@ -72,6 +72,8 @@ public class ProductoForm {
 		this.cantidadProductos = cantidadProductos;
 	}
 	
+
+
 	
 	
 }

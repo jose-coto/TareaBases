@@ -27,9 +27,9 @@ public class MantieneProveedor {
 		return "mantenerProveedores";
 	}
 	
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/jofrasa")
 	public String iniciar(){
-		return "index";
+		return "jofrasa";
 	}
 	
 	@RequestMapping(value="/about")

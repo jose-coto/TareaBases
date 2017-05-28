@@ -34,7 +34,7 @@ public class EmpleadoDao {
 	private DataSource datasource;
 	private SimpleJdbcCall simpleJdbcCallEmpleadoInsertar;
 	private SimpleJdbcCall simpleJdbcCallEmpleadoBorrar;
-	
+	private SimpleJdbcCall simpleJdbcCallEmpleadoModificar;
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.datasource= dataSource;
@@ -57,6 +57,19 @@ public class EmpleadoDao {
 				.withProcedureName("eliminarEmpleado")
 				.withoutProcedureColumnMetaDataAccess()
 				.declareParameters(new SqlParameter("cedula", Types.CHAR));
+		
+		this.simpleJdbcCallEmpleadoModificar = new SimpleJdbcCall(dataSource)
+				.withCatalogName("dbo")
+				.withProcedureName("modificarEmpleado")
+				.withoutProcedureColumnMetaDataAccess()
+				.declareParameters(new SqlParameter("cedula", Types.CHAR))
+				.declareParameters(new SqlParameter("seguroSocial", Types.CHAR))
+				.declareParameters(new SqlParameter("nombre", Types.VARCHAR))
+				.declareParameters(new SqlParameter("apellidos", Types.VARCHAR))
+				.declareParameters(new SqlParameter("telefono", Types.CHAR))
+				.declareParameters(new SqlParameter("tipo", Types.CHAR))
+				.declareParameters(new SqlParameter("precioHora", Types.FLOAT))
+				.declareParameters(new SqlParameter("licenciaLaboral", Types.VARCHAR));
 	}
 	
 	public List<Empleado> findAllEmpleados(){
@@ -77,7 +90,7 @@ public class EmpleadoDao {
 				+ " where e.nombre != 'No suministrado' and e.cedula='"+cedula+"'";
 		
 		List<Empleado> empleado= jdbcTemplate.query(sqlSelect, new EmpleadoExtractor());
-		
+		System.out.println(empleado.size());
 		if(empleado.isEmpty()){
 			return null;
 		}else{
@@ -99,8 +112,22 @@ public class EmpleadoDao {
 		
 		simpleJdbcCallEmpleadoInsertar.execute(parameterSource);
 		
-		//producto.setCodProducto(Integer.parseInt(outParameters.get("codProducto").toString()));
 		return empleado;
+	}
+	
+	public void edit(EmpleadoForm empleado) throws SQLException{
+		SqlParameterSource parameterSource = new MapSqlParameterSource()
+				.addValue("cedula", empleado.getCedula())
+				.addValue("seguroSocial", empleado.getSeguroSocial())
+				.addValue("nombre", empleado.getNombre())
+				.addValue("apellidos", empleado.getApellidos())
+				.addValue("telefono", empleado.getTelefono())
+				.addValue("tipo", empleado.getTipo())
+				.addValue("precioHora", empleado.getPrecioHora())
+				.addValue("licenciaLaboral", empleado.getLicenciaLaboral());
+		
+		
+		simpleJdbcCallEmpleadoModificar.execute(parameterSource);
 	}
 	
 	public void borrar(String cedula){

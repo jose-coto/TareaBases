@@ -25,53 +25,59 @@ import com.tareabases.form.ProductoForm;
 public class ModificarProductoController {
 
 	@Autowired
+	private ProveedorService proveedorService;
+	@Autowired
 	private ProductoService productoService;
 	
-	@Autowired
-	private ProveedorService proveedorService;
-	
-	private ProductoForm productoModificar;
-	
-	@RequestMapping(value="/modificarProducto/{id}/**", method=RequestMethod.GET)
-	public String showForm(ProductoForm productoForm, Model model, @PathVariable String id, HttpServletRequest request){
-		
-		int codigoProducto = Integer.parseInt(new AntPathMatcher().extractPathWithinPattern("/{id}/**", request.getRequestURI()));
-		
-		
-		Producto producto = productoService.findProductByID(codigoProducto);
-		productoForm.setCodProducto(producto.getCodigoProducto());
-		productoForm.setNombre(producto.getNombreProducto());
-		productoForm.setPrecio(producto.getPrecio());
-		productoForm.setTipo(producto.getTipo());
-		productoForm.setCodProveedor(producto.getCodigoProducto());
+	private Producto productoModificar;
+
+	@RequestMapping(value = "/modificarProducto/{id}/**", method = RequestMethod.GET)
+	public String showForm(ProductoForm productoForm, Model model, @PathVariable String id,
+			HttpServletRequest request) {
+
+		int codigoProducto = Integer
+				.parseInt(new AntPathMatcher().extractPathWithinPattern("/{id}/**", request.getRequestURI()));
+
+		productoModificar = productoService.findProductByID(codigoProducto);
+		System.out.println(productoModificar.getCodigoProducto());
+		productoForm.setCodProducto(productoModificar.getCodigoProducto());
+		productoForm.setNombre(productoModificar.getNombreProducto());
+		productoForm.setPrecio(productoModificar.getPrecio());
+		productoForm.setTipo(productoModificar.getTipo());
+		productoForm.setCodProveedor(productoModificar.getProveedor().getCodigoProveedor());
 		productoForm.setCantidadProductos(0);
 		
-		//model.addAttribute("productoForm", productoModificar);
-		model.addAttribute("proveedores", proveedorService.findAllProveedors());
 		
+		model.addAttribute("productoForm", productoForm);
+		model.addAttribute("proveedores", proveedorService.findAllProveedors());
 		return "modificarProducto";
 	}
-	
-	@RequestMapping(value="/modifcarProducto/salvar", method=RequestMethod.POST)
+
+	@RequestMapping(value="/modificarProducto/salvar", method=RequestMethod.POST)
 	public String save(@Valid ProductoForm productoForm, BindingResult bindingResult, Model model, @RequestParam Map<String, String> requestParams){
 		
-		boolean modificado;
+		boolean insertado;
 		
 		if(bindingResult.hasErrors()){
-			//model.addAttribute("productoForm", productoModificar);
+			model.addAttribute("productoForm", productoForm);
 			model.addAttribute("proveedores", proveedorService.findAllProveedors());
 			return "modificarProducto";
 		}else{
-			productoService.modificar(productoForm);
-			modificado=true;
+			try {
+				productoService.modificar(productoForm);
+				insertado=true;
+			} catch (SQLException e) {
+				insertado=false;
+			}
 		}
 		
-		if(modificado){
+		if(insertado){
 			model.addAttribute("mensaje", "El producto fue modificado con exito");
 			return "success";
 		}else{
-			model.addAttribute("mensaje", "No se puedo modficar el producto");
+			model.addAttribute("mensaje", "No se puedo modificar el producto");
 			return "error";
 		}
 	}
+
 }

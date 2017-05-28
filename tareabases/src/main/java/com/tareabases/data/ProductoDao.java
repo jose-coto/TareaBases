@@ -109,12 +109,11 @@ public class ProductoDao {
 		
 		simpleJdbcCallProductoInsertar.execute(parameterSource);
 		
-		//producto.setCodProducto(Integer.parseInt(outParameters.get("codProducto").toString()));
 		return producto;
 	}
 	
 
-	public void modificar(ProductoForm producto){
+	public void modificar(ProductoForm producto) throws SQLException{
 		
 		System.out.println(producto.getCodProducto());
 		SqlParameterSource parameterSource = new MapSqlParameterSource()

@@ -32,7 +32,7 @@ public class ProductoService {
 		return productoDao.save(producto);
 	}
 
-	public void modificar(ProductoForm producto){
+	public void modificar(ProductoForm producto) throws SQLException{
 		productoDao.modificar(producto);
 	}
 }

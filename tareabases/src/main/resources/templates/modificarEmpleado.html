@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Modificar empleado</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div class="container">
+	<h1>Modificar empleado</h1>
+	
+	<form th:object="${empleadoForm}" action="#" th:action="@{/modificarEmpleado/salvar}" method="post">
+		
+		<input type="hidden" th:field="*{cedula}">
+		
+		<div class="form-group">
+			<label>Seguro Social: </label> 
+			<input type="text" th:field="*{seguroSocial}" class="form-control"  >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('seguroSocial')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Nombre: </label> 
+			<input type="text" th:field="*{nombre}" class="form-control"  >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('nombre')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Apellidos: </label> 
+			<input type="text" th:field="*{apellidos}" class="form-control"  >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('apellidos')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Telefono: </label> 
+			<input type="text" th:field="*{telefono}" class="form-control"  >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('telefono')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Tipo: </label> 
+			<select th:field="*{tipo}" class="form-control">
+				<option th:value="A">Administrador(a)</option>
+				<option th:value="C">Cajero(a)</option>
+				<option th:value="F">Farmacutico(a)</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label>Precio Hora: </label> 
+			<input type="text" th:field="*{precioHora}" class="form-control"  >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('precioHora')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Licencia Laboral: </label> 
+			<input type="text" th:field="*{licenciaLaboral}" class="form-control"  >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('licenciaLaboral')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		
+		<button type="submit" class="btn btn-default" name="Insertar">Salvar</button>
+	</form>
+</div>
+
+</body>
+</html>

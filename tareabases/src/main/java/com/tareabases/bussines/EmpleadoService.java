@@ -31,4 +31,8 @@ public class EmpleadoService {
 	public void borrar(String cedula){
 		empleadoDao.borrar(cedula);
 	}
+	
+	public void modificar(EmpleadoForm empleado) throws SQLException{
+		empleadoDao.edit(empleado);
+	}
 }

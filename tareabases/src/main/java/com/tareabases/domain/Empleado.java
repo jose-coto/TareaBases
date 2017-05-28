@@ -28,6 +28,13 @@ public class Empleado {
 		this.licenciaLaboral = licenciaLaboral;
 	}
 
+	public Empleado(String cedula, String seguroSocial, String nombre,String telefono) {
+		this.cedula = cedula;
+		this.seguroSocial = seguroSocial;
+		this.nombre = nombre;
+		this.telefono = telefono;
+	}
+	
 	public String getCedula() {
 		return cedula;
 	}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tareabases.bussines.ReporteEmpleadoService;
+import com.tareabases.domain.Empleado;
 
 @Controller
 public class ReporteEmpleadoController {
@@ -25,8 +26,14 @@ public class ReporteEmpleadoController {
 	public String reporte(Model model, @RequestParam Map<String, String> requestParams){
 		String date1 = requestParams.get("date1");
 		String date2 = requestParams.get("date2");
-		String reporte = reporteEmpleadoService.reporte(date1, date2);
-		model.addAttribute("mensaje", reporte);
+		Empleado e = reporteEmpleadoService.reporte(date1, date2);
+		
+		String reporte="El empleado mejor pagado es:\n"
+				+ "Cedula: "+e.getCedula()+"\n"
+				+ "Seguro Social: "+ e.getSeguroSocial()+"\n"
+						+ "Nombre: "+e.getNombre()+"\n"
+								+ "Telefono: "+e.getTelefono();
+		model.addAttribute("mensaje",reporte);
 		
 		return "success";
 	}
