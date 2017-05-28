@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+<title>Borrar Producto</title>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<div th:if="${productoBorrar} == null">
+				<p class="small"><label th:text="'La prodducto que desea eliminar no existe"></label></p>
+			</div>
+			<div th:if="${productoBorrar} != null">
+				<p class="small"><label th:text="'¿Esta seguro que desea eliminar el producto siguiente?'"></label></p>
+				<br>
+				<p class="small"><label th:text="'Codigo Producto: ' + ${productoBorrar.codigoProducto}"></label></p>
+				<br>
+				<p class="small"><label th:text="'Nombre: ' + ${productoBorrar.nombreProducto}"></label></p>
+			</div>
+			
+			<a th:href="@{/mantenerProductos}" class="btn btn-success">Cancelar</a>
+			<a th:href="@{/eliminarProducto/accept}" class="btn btn-danger">Aceptar</a>
+		</div>
+	</div>
+</body>
+</html>

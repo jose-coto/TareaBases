@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mantener empleados</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div th:if="${empleados}">
+		<div th:if="${empleados.isEmpty()}">
+			<div class="alert alert-danger">
+					<strong>Atencion:</strong> <h4>No se encontraron resultados</h4>
+			</div>
+		</div>
+		<div th:if="${!empleados.isEmpty()}">
+			<div class="alert alert-success">
+					<h3>Los empleados son:</h3>
+			</div>
+			<table class="table table-striped table-hover">
+				<tr>
+					<th>Cedula</th>
+					<th>Seguro Social</th>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Telefono</th>
+					<th>Tipo</th>
+					<th>Precio Hora</th>
+					<th>Licencia Laboral</th>
+					<th>Accion</th>
+				</tr>
+				<tr th:each="entry,status : ${empleados}">
+					<td><span th:text="${entry.cedula}"></span></td>
+					<td><span th:text="${entry.seguroSocial}"></span></td>
+					<td><span th:text="${entry.nombre}"></span></td>
+					<td><span th:text="${entry.apellidos}"></span></td>
+					<td><span th:text="${entry.tipo}"></span></td>
+					<td><span th:text="${entry.precioHora}"></span></td>
+					<td><span th:text="${entry.licenciaLaboral}"></span></td>
+					<td><a th:href="@{/modificarEmpleado/{id}(id=${entry.cedula})}" class="btn btn-primary">Modificar Empleado</a>
+					<a th:href="@{/eliminarEmpleado/{id}(id=${entry.cedula})}" class="btn btn-danger">Borrar Empleado</a></td>
+				</tr>
+			</table>
+			<a th:href="@{/addEmpleado}" class="btn btn-success">Añadir Empleado</a>
+		</div>
+	</div>
+
+</body>
+</html>

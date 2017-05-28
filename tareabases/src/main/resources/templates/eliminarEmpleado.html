@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+<title>Borrar Empleado</title>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<div th:if="${empleadoBorrar} == null">
+				<p class="small"><label th:text="'El empleado que desea eliminar no existe'"></label></p>
+			</div>
+			<div th:if="${empleadoBorrar} != null">
+				<p class="small"><label th:text="'¿Esta seguro que desea eliminar el empleado siguiente?'"></label></p>
+				<br>
+				<p class="small"><label th:text="'Cedula: ' + ${empleadoBorrar.cedula}"></label></p>
+				<br>
+				<p class="small"><label th:text="'Nombre: ' + ${empleadoBorrar.nombre+' '+empleadoBorrar.apellidos}"></label></p>
+			</div>
+			
+			<a th:href="@{/mantenerEmpleados}" class="btn btn-success">Cancelar</a>
+			<a th:href="@{/eliminarEmpleado/accept}" class="btn btn-danger">Aceptar</a>
+		</div>
+	</div>
+</body>
+</html>

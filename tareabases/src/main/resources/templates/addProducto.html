@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insertar nuevo producto</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+<div class="container">
+	<h1>Insertar nuevo producto</h1>
+	
+	<form th:object="${productoForm}" action="#" th:action="@{/addProducto/salvar}" method="post">
+		
+		<div class="form-group">
+			<label>Nombre: </label> 
+			<input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre">
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('nombre')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Precio: </label> 
+			<input type="number" th:field="*{precio}" class="form-control" >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('precio')}" class="alert alert-danger"> ERROR</div>
+		</div>
+		
+		<div class="form-group">
+			<label>Tipo: </label> 
+			<input type="text" th:field="*{tipo}" class="form-control" placeholder="Tipo de medicamento" >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('tipo')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Proveedor: </label> 
+			<select th:field="*{codProveedor}" class="form-control">
+				<option th:each="proveedor: ${proveedores}" th:value="${proveedor.codigoProveedor}"
+					th:text="${proveedor.nombre}">
+				</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label>Cantidad Productos: </label> 
+			<input type="number" th:field="*{cantidadProductos}" class="form-control">
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('cantidadProductos')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<button type="submit" class="btn btn-default" name="Insertar">Salvar</button>
+	</form>
+</div>
+</body>
+</html>

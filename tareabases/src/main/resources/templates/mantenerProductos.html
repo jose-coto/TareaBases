@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mantener productos</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div th:if="${productos}">
+		<div th:if="${productos.isEmpty()}">
+			<div class="alert alert-danger">
+					<strong>Atencion:</strong> <h4>No se encontraron resultados</h4>
+			</div>
+		</div>
+		<div th:if="${!productos.isEmpty()}">
+			<div class="alert alert-success">
+					<h3>Los productos son:</h3>
+			</div>
+			<table class="table table-striped table-hover">
+				<tr>
+					<th>Codigo</th>
+					<th>Nombre</th>
+					<th>Precio</th>
+					<th>Tipo</th>
+					<th>Proveedor</th>
+					<th>Accion</th>
+				</tr>
+				<tr th:each="entry,status : ${productos}">
+					<td><span th:text="${entry.codigoProducto}"></span></td>
+					<td><span th:text="${entry.nombreProducto}"></span></td>
+					<td><span th:text="${entry.precio}"></span></td>
+					<td><span th:text="${entry.tipo}"></span></td>
+					<td><span th:text="${entry.proveedor.nombre}"></span></td>
+					<td><a th:href="@{/modificarProducto/{id}(id=${entry.codigoProducto})}" class="btn btn-primary">Modificar Producto</a>
+					<a th:href="@{/eliminarProducto/{id}(id=${entry.codigoProducto})}" class="btn btn-danger">Borrar Producto</a></td>
+				</tr>
+			</table>
+			<a th:href="@{/addProducto}" class="btn btn-success">Añadir Producto</a>
+		</div>
+	</div>
+
+</body>
+</html>

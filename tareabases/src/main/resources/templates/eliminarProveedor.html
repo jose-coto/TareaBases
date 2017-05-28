@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+<title>Borrar Proveedor</title>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<div th:if="${proveedorBorrar} == null">
+				<p class="small"><label th:text="'El proveedor que desea eliminar no existe"></label></p>
+			</div>
+			<div th:if="${proveedorBorrar} != null">
+				<p class="small"><label th:text="'¿Esta seguro que desea eliminar el proveedor siguiente?'"></label></p>
+				<br>
+				<p class="small"><label th:text="'Codigo Proveedor: ' + ${proveedorBorrar.codigoProveedor}"></label></p>
+				<br>
+				<p class="small"><label th:text="'Nombre: ' + ${proveedorBorrar.nombre}"></label></p>
+			</div>
+			
+			<a th:href="@{/mantenerProveedor}" class="btn btn-success">Cancelar</a>
+			<a th:href="@{/eliminarProveedor/accept}" class="btn btn-danger">Aceptar</a>
+		</div>
+	</div>
+</body>
+</html>

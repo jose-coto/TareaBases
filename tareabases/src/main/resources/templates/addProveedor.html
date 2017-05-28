@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insertar un proveedor</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div class="container">
+	<h1>Insertar nuevo proveedor</h1>
+	
+	<form th:object="${proveedorForm}" action="#" th:action="@{/addProveedor/salvar}" method="post">
+		
+		<div class="form-group">
+			<label>Nombre: </label> 
+			<input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre">
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('nombre')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<div class="form-group">
+			<label>Teléfono: </label> 
+			<input type="text" th:field="*{telefono}" class="form-control" placeholder="Teléfono" >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('telefono')}" class="alert alert-danger"> ERROR </div>
+		</div>
+		
+		<button type="submit" class="btn btn-default" name="Insertar">Salvar</button>
+	</form>
+</div>
+</body>
+</html>
