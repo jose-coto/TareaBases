@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Factura</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div class="container">
+	<h1>Realizar nueva factura</h1>
+	
+	<form th:object="${facturaForm}" action="#" th:action="@{/generarFactura/salvar}" method="post">
+		
+		<div class="form-group">
+			<label>Producto: </label> 
+			<select th:field="*{codProducto}" class="form-control">
+				<option th:each="producto: ${productos}" th:value="${producto.codigoProducto}"
+					th:text="${producto.nombreProducto}">
+				</option>
+			</select>
+		</div>		
+		
+		<div class="form-group">
+			<label>Cantidad de productos: </label> 
+			<input type="number" th:field="*{cantidadProductos}" class="form-control" >
+			<div style="clear: both; display: block; heigth: 10px;"></div>
+			<div th:if="${#fields.hasErrors('cantidadProductos')}" class="alert alert-danger"> ERROR</div>
+		</div>
+		
+		<div class="form-group">
+			<label>Producto: </label> 
+			<select th:field="*{cedulaEmpleado}" class="form-control">
+				<option th:each="empleado: ${empleados}" th:value="${empleado.cedula}"
+					th:text="${empleado.nombre+' '+empleado.apellidos}">
+				</option>
+			</select>
+		</div>
+		
+		<button type="submit" class="btn btn-default" name="Insertar">Salvar</button>
+	</form>
+</div>
+</body>
+</html>
