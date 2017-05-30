@@ -24,11 +24,12 @@ import com.tareabases.form.ProveedorForm;
 public class generarFacturaController {
 	@Autowired
 	FacturaService facturaService;
-	
 	@Autowired
 	ProductoService productoService;
 	@Autowired
 	EmpleadoService empleadoService;
+	
+	Factura factura;
 	
 	@RequestMapping(value="/generarFactura", method=RequestMethod.GET)
 	public String showForm(Model model, FacturaForm facturaForm){
@@ -48,8 +49,7 @@ public class generarFacturaController {
 			return "generarFactura";
 		}else{
 			try {
-				Factura factura=facturaService.generarFactura(facturaForm);
-				System.out.println(factura.toString());
+				factura=facturaService.generarFactura(facturaForm);
 				insertado=true;
 			} catch (SQLException e) {
 				insertado=false;
@@ -57,8 +57,18 @@ public class generarFacturaController {
 		}
 		
 		if(insertado){
-			model.addAttribute("mensaje", "El proveedor fue insertado con exito");
-			return "success";
+			model.addAttribute("encabezado", "JOFRA S.A");
+			model.addAttribute("subencabezado", "Su cadena farmaceutica de confianza");
+			model.addAttribute("fecha", factura.getFecha());
+			model.addAttribute("codFactura", factura.getCodFactura());
+			model.addAttribute("codEmpleado", factura.getCedula());
+			model.addAttribute("nombreEmpleado", factura.getNombre());
+			model.addAttribute("cantidad", factura.getCantidadProductos());
+			model.addAttribute("nombreProducto", factura.getNombreProducto());
+			model.addAttribute("precio", factura.getPrecio());
+			model.addAttribute("total", factura.getTotal());
+			
+			return "comprobanteFactura";
 		}else{
 			model.addAttribute("mensaje", "No se puedo registrar la compra");
 			return "error";

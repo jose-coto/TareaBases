@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Comprobante</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+				<h2>
+					<label th:text="${encabezado}"></label>
+				</h2>
+				<h2 class="small">
+					<label>Cedula:
+					<label th:text="${cedula}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Seguro Social: 
+					<label th:text="${seguroSocial}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Nombre:
+					<label th:text="${nombre}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Telefono:
+					<label th:text="${telefono}"> </label></label>
+				</h2>
+				
+			<a th:href="@{/jofrasa}" class="btn btn-success">Pagina Principal</a>
+		</div>
+	</div>
+</body>
+</html>

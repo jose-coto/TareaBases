@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Comprobante</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap-glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" media="all" href="css/styles.css"></link>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+				<h2>
+					<label th:text="${encabezado}"></label>
+				</h2>
+				<h2 class="small">
+					<label th:text="${subencabezado}"> </label>
+				</h2>
+				<h2 class="small">
+					<label>Fecha: 
+					<label th:text="${fecha}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Codigo Factura:
+					<label th:text="${codFactura}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Codigo Empleado:
+					<label th:text="${codEmpleado}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Nombre: 
+					<label th:text="${nombreEmpleado}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Cantidad: 
+					<label th:text="${cantidad}"> </label></label></label>
+				</h2>
+				<h2 class="small">
+					<label>Producto:
+					<label th:text="${nombreProducto}"> </label></label></label>
+				</h2>
+				<h2 class="small">
+					<label>Precio Unidad: 
+					<label th:text="${precio}"> </label></label>
+				</h2>
+				<h2 class="small">
+					<label>Total: 
+					<label th:text="${total}"> </label></label>
+				</h2>
+				
+			<a th:href="@{/jofrasa}" class="btn btn-success">Pagina Principal</a>
+		</div>
+	</div>
+</body>
+</html>

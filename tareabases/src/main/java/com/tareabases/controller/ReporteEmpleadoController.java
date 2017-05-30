@@ -28,14 +28,12 @@ public class ReporteEmpleadoController {
 		String date2 = requestParams.get("date2");
 		Empleado e = reporteEmpleadoService.reporte(date1, date2);
 		
-		String reporte="El empleado mejor pagado es:\n"
-				+ "Cedula: "+e.getCedula()+"\n"
-				+ "Seguro Social: "+ e.getSeguroSocial()+"\n"
-						+ "Nombre: "+e.getNombre()+"\n"
-								+ "Telefono: "+e.getTelefono();
-		model.addAttribute("mensaje",reporte);
-		
-		return "success";
+		model.addAttribute("encabezado","El empleado(a) mejor pagado es");
+		model.addAttribute("cedula",e.getCedula());
+		model.addAttribute("seguroSocial",e.getSeguroSocial());
+		model.addAttribute("nombre",e.getNombre());
+		model.addAttribute("telefono",e.getTelefono());
+		return "reporteEmpleadoMejorPagado";
 	}
 	
 }
