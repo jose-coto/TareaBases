@@ -7,10 +7,10 @@ public class EmpleadoForm {
 
 	
 	@NotNull
-	@Size(max=9)
+	@Size(min=9,max=9)
 	private String cedula;
 	@NotNull
-	@Size(max=15)
+	@Size(min=15,max=15)
 	private String seguroSocial;
 	@NotNull
 	@Size(max=50)
