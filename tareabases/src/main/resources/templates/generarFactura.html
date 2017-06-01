@@ -32,7 +32,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label>Producto: </label> 
+			<label>Usuario: </label> 
 			<select th:field="*{cedulaEmpleado}" class="form-control">
 				<option th:each="empleado: ${empleados}" th:value="${empleado.cedula}"
 					th:text="${empleado.nombre+' '+empleado.apellidos}">
